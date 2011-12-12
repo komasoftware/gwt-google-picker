@@ -16,168 +16,174 @@ import com.google.gwt.user.client.ui.RootPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class PickerExample implements EntryPoint {
-  public void onModuleLoad() {
-    PickerLoader.loadApi(new Runnable() {
-      public void run() {
-        onPickerLoaded();
-      }
-    });
-  }
+	private String API_KEY = "ABQIAAAAEkVppYdTSEm7bRYWk3asKhRi_j0U6kJrkFvY4-OX2XYmEAa76BQQdp3lDrRrX26Mir42hNxas7NyuQ";
 
-  private void onPickerLoaded() {
-    for (final ViewId viewId : ViewId.values()) {
-      final Button button = new Button(viewId.name().toLowerCase());
-      button.addClickHandler(new ClickHandler() {
-        public void onClick(ClickEvent clickEvent) {
-          onCreatePicker(viewId);
-        }
-      });
+	public void onModuleLoad() {
+		PickerLoader.loadApi(API_KEY, new Runnable() {
+			public void run() {
+				onPickerLoaded();
+			}
+		});
+	}
 
-      RootPanel.get("buttons").add(button);
-    }
+	private void onPickerLoaded() {
+		for (final ViewId viewId : ViewId.values()) {
+			final Button button = new Button(viewId.name().toLowerCase());
+			button.addClickHandler(new ClickHandler() {
+				public void onClick(ClickEvent clickEvent) {
+					onCreatePicker(viewId);
+				}
+			});
 
-    final Button button = new Button("View Group");
-    RootPanel.get("buttons").add(button);
+			RootPanel.get("buttons").add(button);
+		}
 
-    button.addClickHandler(new ClickHandler() {
-      public void onClick(ClickEvent clickEvent) {
-        final ViewGroup group = ViewGroup.create(MapsView.create());
-        group.addView(ImageSearchView.create());
-        group.addView(PhotosView.create());
-        group.addView(VideoSearchView.create());
-        group.addView(ViewId.DOCUMENTS);
+		final Button button = new Button("View Group");
+		RootPanel.get("buttons").add(button);
 
-        final Picker picker = PickerBuilder.create()
-                .addViewGroup(group)
-                .addView(ViewId.VIDEO_SEARCH)
-                .setLocale("de")
-                .setTitle("my big fat picker example")
-                .setUploadToAlbumId("albumId")
-                .enableFeature(Feature.MULTISELECT_ENABLED)
-                .disableFeature(Feature.NAV_HIDDEN)
-                .setCallback(new PickerCallback<JavaScriptObject>() {
-                  @Override
-                  public void onPicked(ViewToken viewToken, JavaScriptObject javaScriptObject) {
-                    final ViewId viewId = viewToken.getViewId();
-                    DOM.getElementById("output").setInnerHTML("Document from " + (viewId != null ? viewId : viewToken.getNativeViewId()) + " view was picked.");
-                  }
+		button.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent clickEvent) {
+				final ViewGroup group = ViewGroup.create(MapsView.create());
+				group.addView(ImageSearchView.create());
+				group.addView(PhotosView.create());
+				group.addView(VideoSearchView.create());
+				group.addView(ViewId.DOCUMENTS);
 
-                  @Override
-                  public void onCanceled() {
-                    doOnCancel();
-                  }
-                })
-                .build();
-        picker.setVisible(true);
-      }
-    });
-  }
+				final Picker picker = PickerBuilder.create()
+						.addViewGroup(group).addView(ViewId.VIDEO_SEARCH)
+						.setLocale("de").setTitle("my big fat picker example")
+						.setUploadToAlbumId("albumId")
+						.enableFeature(Feature.MULTISELECT_ENABLED)
+						.disableFeature(Feature.NAV_HIDDEN)
+						.setCallback(new PickerCallback<JavaScriptObject>() {
+							@Override
+							public void onPicked(ViewToken viewToken,
+									JavaScriptObject javaScriptObject) {
+								final ViewId viewId = viewToken.getViewId();
+								DOM.getElementById("output")
+										.setInnerHTML(
+												"Document from "
+														+ (viewId != null ? viewId
+																: viewToken
+																		.getNativeViewId())
+														+ " view was picked.");
+							}
 
-  private void onCreatePicker(ViewId viewId) {
-    final Picker picker = PickerBuilder.create()
-            .addView(viewId)
-            .setCallback(buildPickerCallback(viewId))
-            .build();
-    picker.setVisible(true);
-  }
+							@Override
+							public void onCanceled() {
+								doOnCancel();
+							}
+						}).build();
+				picker.setVisible(true);
+			}
+		});
+	}
 
-  private PickerCallback buildPickerCallback(ViewId viewId) {
-    switch (viewId) {
-      case DOCS:
-      case DOCUMENTS:
-      case SPREADSHEETS:
-      case FORMS:
-      case PRESENTATIONS:
-      case FOLDERS:
-      case PDFS:
-      case RECENTLY_PICKED:
-        return createDocumentCallback();
-      case IMAGE_SEARCH:
-        return createImageSearchCallback();
-      case MAPS:
-        return createMapsCallback();
-      case PHOTOS:
-      case PHOTO_UPLOAD:
-        return createPhotoCallback();
-      case VIDEO_SEARCH:
-      case YOUTUBE:
-        return createVideoCallback();
-    }
+	private void onCreatePicker(ViewId viewId) {
+		final Picker picker = PickerBuilder.create().addView(viewId)
+				.setCallback(buildPickerCallback(viewId)).build();
+		picker.setVisible(true);
+	}
 
-    return null;
-  }
+	private PickerCallback buildPickerCallback(ViewId viewId) {
+		switch (viewId) {
+		case DOCS:
+		case DOCUMENTS:
+		case SPREADSHEETS:
+		case FORMS:
+		case PRESENTATIONS:
+		case FOLDERS:
+		case PDFS:
+		case RECENTLY_PICKED:
+			return createDocumentCallback();
+		case IMAGE_SEARCH:
+			return createImageSearchCallback();
+		case MAPS:
+			return createMapsCallback();
+		case PHOTOS:
+		case PHOTO_UPLOAD:
+			return createPhotoCallback();
+		case VIDEO_SEARCH:
+		case YOUTUBE:
+			return createVideoCallback();
+		}
 
-  private PickedVideoCallback createVideoCallback() {
-    return new PickedVideoCallback() {
-      @Override
-      public void onPicked(ViewToken viewToken, VideoResult videoResult) {
-        ResultPrinter.print(viewToken,  videoResult);
-      }
+		return null;
+	}
 
-      @Override
-      public void onCanceled() {
-        doOnCancel();
-      }
-    };
-  }
+	private PickedVideoCallback createVideoCallback() {
+		return new PickedVideoCallback() {
+			@Override
+			public void onPicked(ViewToken viewToken, VideoResult videoResult) {
+				ResultPrinter.print(viewToken, videoResult);
+			}
 
-  private PickedPhotoCallback createPhotoCallback() {
-    return new PickedPhotoCallback() {
-      @Override
-      public void onPicked(ViewToken viewToken, PhotoResult photoResult) {
-        ResultPrinter.print(viewToken, photoResult);
-      }
+			@Override
+			public void onCanceled() {
+				doOnCancel();
+			}
+		};
+	}
 
-      @Override
-      public void onCanceled() {
-        doOnCancel();
-      }
-    };
-  }
+	private PickedPhotoCallback createPhotoCallback() {
+		return new PickedPhotoCallback() {
+			@Override
+			public void onPicked(ViewToken viewToken, PhotoResult photoResult) {
+				ResultPrinter.print(viewToken, photoResult);
+			}
 
-  private PickedMapCallback createMapsCallback() {
-    return new PickedMapCallback() {
-      @Override
-      public void onPicked(ViewToken viewToken, MapResult mapResult) {
-        ResultPrinter.print(viewToken, mapResult);
-      }
+			@Override
+			public void onCanceled() {
+				doOnCancel();
+			}
+		};
+	}
 
-      @Override
-      public void onCanceled() {
-        doOnCancel();
-      }
-    };
-  }
+	private PickedMapCallback createMapsCallback() {
+		return new PickedMapCallback() {
+			@Override
+			public void onPicked(ViewToken viewToken, MapResult mapResult) {
+				ResultPrinter.print(viewToken, mapResult);
+			}
 
-  private PickedDocumentCallback createDocumentCallback() {
-    return new PickedDocumentCallback() {
-      @Override
-      public void onPicked(ViewToken viewToken, DocumentResult documentResult) {
-        ResultPrinter.print(viewToken, documentResult);
-      }
+			@Override
+			public void onCanceled() {
+				doOnCancel();
+			}
+		};
+	}
 
-      @Override
-      public void onCanceled() {
-        doOnCancel();
-      }
-    };
-  }
+	private PickedDocumentCallback createDocumentCallback() {
+		return new PickedDocumentCallback() {
+			@Override
+			public void onPicked(ViewToken viewToken,
+					DocumentResult documentResult) {
+				ResultPrinter.print(viewToken, documentResult);
+			}
 
-  private PickedImageSearchCallback createImageSearchCallback() {
-    return new PickedImageSearchCallback() {
-      @Override
-      public void onPicked(ViewToken viewToken, ImageSearchResult imageSearchResult) {
-        ResultPrinter.print(viewToken, imageSearchResult);
-      }
+			@Override
+			public void onCanceled() {
+				doOnCancel();
+			}
+		};
+	}
 
-      @Override
-      public void onCanceled() {
-        doOnCancel();
-      }
-    };
-  }
+	private PickedImageSearchCallback createImageSearchCallback() {
+		return new PickedImageSearchCallback() {
+			@Override
+			public void onPicked(ViewToken viewToken,
+					ImageSearchResult imageSearchResult) {
+				ResultPrinter.print(viewToken, imageSearchResult);
+			}
 
-  private void doOnCancel() {
-    DOM.getElementById("output").setInnerHTML("canceled");
-  }
+			@Override
+			public void onCanceled() {
+				doOnCancel();
+			}
+		};
+	}
+
+	private void doOnCancel() {
+		DOM.getElementById("output").setInnerHTML("canceled");
+	}
 }
