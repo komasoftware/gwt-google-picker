@@ -22,31 +22,32 @@ import com.google.gwt.junit.client.GWTTestCase;
 import com.google.gwt.picker.client.utils.PickerLoader;
 
 public abstract class PickerTestCase extends GWTTestCase {
-  private boolean apiAlreadyLoaded = false;
+	private String API_KEY = "ABQIAAAAEkVppYdTSEm7bRYWk3asKhRi_j0U6kJrkFvY4-OX2XYmEAa76BQQdp3lDrRrX26Mir42hNxas7NyuQ";
+	private boolean apiAlreadyLoaded = false;
 
-  @Override
-  public String getModuleName() {
-    return "com.google.gwt.picker.PickerTest";
-  }
+	@Override
+	public String getModuleName() {
+		return "com.google.gwt.picker.PickerTest";
+	}
 
-  public void withApi(Runnable runnable) {
-    withApi(runnable, true);
-  }
+	public void withApi(Runnable runnable) {
+		withApi(runnable, true);
+	}
 
-  public void withApi(final Runnable runnable, final boolean callFinishTest) {
-    if (apiAlreadyLoaded) {
-      runnable.run();
-      return;
-    }
-    
-    PickerLoader.loadApi(new Runnable() {
-      public void run() {
-        apiAlreadyLoaded = true;
-        runnable.run();
-        if (callFinishTest) {
-          finishTest();
-        }
-      }
-    });
-  }
+	public void withApi(final Runnable runnable, final boolean callFinishTest) {
+		if (apiAlreadyLoaded) {
+			runnable.run();
+			return;
+		}
+
+		PickerLoader.loadApi(API_KEY, new Runnable() {
+			public void run() {
+				apiAlreadyLoaded = true;
+				runnable.run();
+				if (callFinishTest) {
+					finishTest();
+				}
+			}
+		});
+	}
 }
