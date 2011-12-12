@@ -26,7 +26,6 @@ import com.google.gwt.ajaxloader.client.AjaxLoader;
  */
 public class PickerLoader {
   public static final String PICKER_API = "picker";
-  public static String API_KEY = "ABQIAAAAEkVppYdTSEm7bRYWk3asKhRi_j0U6kJrkFvY4-OX2XYmEAa76BQQdp3lDrRrX26Mir42hNxas7NyuQ";
   public static String PICKER_VERSION = "1";
 
   /**
@@ -35,8 +34,8 @@ public class PickerLoader {
    *
    * @param runnable The callback
    */
-  public static void loadApi(Runnable runnable) {
-    loadApi(PICKER_VERSION, runnable);
+  public static void loadApi(String apiKey, Runnable runnable) {
+    loadApi(apiKey, PICKER_VERSION, runnable);
   }
 
   /**
@@ -45,10 +44,10 @@ public class PickerLoader {
    * @param version The picker version
    * @param runnable The callback
    */
-  public static void loadApi(String version, Runnable runnable) {
+  public static void loadApi(String apiKey, String version, Runnable runnable) {
     final AjaxLoader.AjaxLoaderOptions loaderOptions = AjaxLoader.AjaxLoaderOptions.newInstance();
     loaderOptions.setOtherParms("sensor=false");
-    loadApi(version, runnable, loaderOptions);
+    loadApi(apiKey, version, runnable, loaderOptions);
   }
 
   /**
@@ -58,8 +57,8 @@ public class PickerLoader {
    * @param runnable The callback
    * @param options The ajax-loader options
    */
-  public static void loadApi(String version, Runnable runnable, AjaxLoader.AjaxLoaderOptions options) {
-    AjaxLoader.init(API_KEY);
+  public static void loadApi(String apiKey, String version, Runnable runnable, AjaxLoader.AjaxLoaderOptions options) {
+    AjaxLoader.init(apiKey);
     AjaxLoader.loadApi(PICKER_API, version, runnable, options);
   }
 }
