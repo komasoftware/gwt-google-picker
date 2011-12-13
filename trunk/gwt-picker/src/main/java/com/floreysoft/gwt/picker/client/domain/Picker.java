@@ -42,7 +42,7 @@ public final class Picker extends JavaScriptObject {
    */
   public native void setCallback(PickerCallback callback) /*-{
     return this.setCallback(function(object) {
-      @com.floreysoft.gwt.picker.client.callback.PickerCallbackDispatcher::dispatch(Lcom/google/gwt/picker/client/callback/PickerCallback;Lcom/google/gwt/core/client/JavaScriptObject;)(callback, object);
+      @com.floreysoft.gwt.picker.client.callback.PickerCallbackDispatcher::dispatch(Lcom/floreysoft/gwt/picker/client/callback/PickerCallback;Lcom/google/gwt/core/client/JavaScriptObject;)(callback, object);
     });
   }-*/;
 
