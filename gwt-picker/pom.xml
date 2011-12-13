@@ -4,7 +4,7 @@
 
   <!-- POM file generated with GWT webAppCreator -->
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.google.gwt.google-apis</groupId>
+  <groupId>com.floreysoft.gwt.google-apis</groupId>
   <artifactId>gwt-picker</artifactId>
   <packaging>jar</packaging>
   <version>0.1</version>
@@ -20,13 +20,13 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.google.gwt</groupId>
+      <groupId>com.floreysoft.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
       <version>${gwtVersion}</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
-      <groupId>com.google.gwt</groupId>
+      <groupId>com.floreysoft.gwt</groupId>
       <artifactId>gwt-user</artifactId>
       <version>${gwtVersion}</version>
       <scope>provided</scope>
