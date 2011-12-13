@@ -2,7 +2,7 @@
 <module rename-to='PickerExample'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User' />
-  <inherits name="com.google.gwt.picker.Picker"/>
+  <inherits name="com.floreysoft.gwt.picker.Picker"/>
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.floreysoft.gwt.pickerexample.client.PickerExample' />
