@@ -18,8 +18,14 @@
 
 package com.floreysoft.gwt.pickerexample.client;
 
+import com.floreysoft.gwt.picker.client.domain.result.DocumentResult;
+import com.floreysoft.gwt.picker.client.domain.result.ImageSearchResult;
+import com.floreysoft.gwt.picker.client.domain.result.MapResult;
+import com.floreysoft.gwt.picker.client.domain.result.PhotoResult;
+import com.floreysoft.gwt.picker.client.domain.result.Thumbnail;
+import com.floreysoft.gwt.picker.client.domain.result.VideoResult;
+import com.floreysoft.gwt.picker.client.domain.result.ViewToken;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.picker.client.domain.result.*;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
 
