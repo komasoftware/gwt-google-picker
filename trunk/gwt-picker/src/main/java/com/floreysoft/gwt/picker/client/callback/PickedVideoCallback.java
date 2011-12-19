@@ -22,5 +22,6 @@ import com.floreysoft.gwt.picker.client.domain.result.VideoResult;
 
 /**
  * ViewId: VIDEO_SEARCH, YOUTUBE
+ * @deprecated Use or extend {@link AbstractPickerCallback}
  */
 public abstract class PickedVideoCallback extends PickerCallback<VideoResult> {}
