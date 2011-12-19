@@ -39,7 +39,7 @@ public final class Picker extends JavaScriptObject {
    * Specify the callback method called whenever the user has picked an item (or canceled.)
    *
    * @param callback The callback to execute
-   * @deprecated
+   * @deprecated Use {@link PickerBuilder#addCallback(com.floreysoft.gwt.picker.client.callback.AbstractPickerCallback)} instead
    */
   public native void setCallback(PickerCallback callback) /*-{
     return this.setCallback(function(object) {

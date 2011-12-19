@@ -18,7 +18,10 @@
 
 package com.floreysoft.gwt.picker.client.domain;
 
+import com.floreysoft.gwt.picker.client.callback.AbstractPickerCallback;
 import com.floreysoft.gwt.picker.client.callback.PickerCallback;
+import com.floreysoft.gwt.picker.client.domain.result.BaseResult;
+import com.floreysoft.gwt.picker.client.domain.result.ViewToken;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
@@ -96,7 +99,9 @@ public final class PickerBuilder extends JavaScriptObject {
    * @return The Picker object is returned.
    */
   public native Picker build() /*-{
+    // Create picker
     return this.build();
+
   }-*/;
 
   /**
@@ -183,10 +188,17 @@ public final class PickerBuilder extends JavaScriptObject {
    * @param callback The callback to add
    * @return The picker builder instance
    */
-  public PickerBuilder addCallback(PickerCallback callback) {
-    // ToDo
+  public native PickerBuilder addCallback(AbstractPickerCallback callback) /*-{
+    var oldCallbackQueue = this['callbackQueue'];
+    this.callbackQueue = function(object) {
+      if (oldCallbackQueue) {
+        oldCallbackQueue(object);
+      }
+      @com.floreysoft.gwt.picker.client.callback.PickerCallbackDispatcher::dispatch(Lcom/floreysoft/gwt/picker/client/callback/AbstractPickerCallback;Lcom/floreysoft/gwt/picker/client/domain/result/BaseResult;)(callback, object);
+    };
+    this.setCallback(this.callbackQueue);
     return this;
-  }
+  }-*/;
 
   /**
    * Set the callback method called when the user picks and item (or items), or cancels.
@@ -195,13 +207,22 @@ public final class PickerBuilder extends JavaScriptObject {
    *
    * @param callback The callback to add
    * @return The picker builder instance
-   * @deprecated Use {@link PickerBuilder#addCallback(com.floreysoft.gwt.picker.client.callback.PickerCallback)} instead
+   * @deprecated Use {@link PickerBuilder#addCallback(com.floreysoft.gwt.picker.client.callback.AbstractPickerCallback)} instead
    */
-  public native PickerBuilder setCallback(PickerCallback callback) /*-{
-    return this.setCallback(function(object) {
-      @com.floreysoft.gwt.picker.client.callback.PickerCallbackDispatcher::dispatch(Lcom/floreysoft/gwt/picker/client/callback/PickerCallback;Lcom/google/gwt/core/client/JavaScriptObject;)(callback, object);
+  public PickerBuilder setCallback(final PickerCallback callback) {
+    addCallback(new AbstractPickerCallback() {
+      @Override
+      public void onPicked(ViewToken viewToken, BaseResult baseResult) {
+        callback.onPicked(viewToken, baseResult);
+      }
+
+      @Override
+      public void onCanceled() {
+        callback.onCanceled();
+      }
     });
-  }-*/;
+    return this;
+  }
 
   /**
    * ToDo: What kind of document could be set here?
@@ -230,6 +251,8 @@ public final class PickerBuilder extends JavaScriptObject {
    * @return A new instance of the picker builder
    */
   public native static PickerBuilder create() /*-{
-    return new $wnd.google.picker.PickerBuilder();
+    var builder = new $wnd.google.picker.PickerBuilder();
+    builder.callbacks = new Array();
+    return builder;
   }-*/;
 }

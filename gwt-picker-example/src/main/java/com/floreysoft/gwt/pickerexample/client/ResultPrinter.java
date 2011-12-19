@@ -103,15 +103,15 @@ public class ResultPrinter {
     }
     for (int i = 0; i < result.getParents().length(); i++) {
       final PhotoResult.ParentDocument document = result.getParents().get(i);
-      writeToOutput("this.getId = " + document.getId());
-      writeToOutput("this.getDescription = " + document.getDescription());
-      writeToOutput("this.getMimeType = " + document.getMimeType());
-      writeToOutput("this.getName = " + document.getName());
-      writeToOutput("this.getServiceId = " + document.getServiceId());
-      writeToOutput("this.getType = " + document.getType());
-      writeToOutput("this.getUrl = " + document.getUrl());
-      writeToOutput("this.getIconUrl = " + document.getIconUrl());
-      writeToOutput("this.getLastEditedUtc = " + document.getLastEditedUtc());
+      writeToOutput("parent.getId = " + document.getId());
+      writeToOutput("parent.getDescription = " + document.getDescription());
+      writeToOutput("parent.getMimeType = " + document.getMimeType());
+      writeToOutput("parent.getName = " + document.getName());
+      writeToOutput("parent.getServiceId = " + document.getServiceId());
+      writeToOutput("parent.getType = " + document.getType());
+      writeToOutput("parent.getUrl = " + document.getUrl());
+      writeToOutput("parent.getIconUrl = " + document.getIconUrl());
+      writeToOutput("parent.getLastEditedUtc = " + document.getLastEditedUtc());
       print(document.getThumbnails());
     }
   }
@@ -138,6 +138,7 @@ public class ResultPrinter {
   private static void print(ViewToken token) {
     clearOutput();
     writeToOutput("getViewId =  " + token.getViewId());
+    writeToOutput("getNativeViewId =  " + token.getNativeViewId());
     for (String key : token.getViewOptions().keySet()) {
       writeToOutput("ViewOptions." + key + " = " + token.getViewOptions().get(key));
     }

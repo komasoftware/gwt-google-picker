@@ -25,7 +25,7 @@ import com.google.gwt.core.client.JsArray;
 /**
  * Provides some basic methods to access common fields of the picker result.
  */
-public final class BaseResult<T extends JavaScriptObject> extends JavaScriptObject {
+public final class BaseResult extends JavaScriptObject {
   protected BaseResult() {}
 
   /**

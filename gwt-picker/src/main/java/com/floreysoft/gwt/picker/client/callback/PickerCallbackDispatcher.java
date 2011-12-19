@@ -36,6 +36,7 @@ public class PickerCallbackDispatcher {
    * @param callback The callback
    * @param result The picker result
    * @param <T> The type of the callback result
+   * @deprecated
    */
   public static <T extends JavaScriptObject> void dispatch(PickerCallback<T> callback, T result) {
     final BaseResult baseResult = result.cast();
@@ -43,6 +44,26 @@ public class PickerCallbackDispatcher {
 
     if (Action.PICKED.equals(baseResult.getAction())) {
       callback.onPicked(viewToken, result);
+    }
+    else {
+      callback.onCanceled();
+    }
+  }
+
+  /**
+   * Dispatches the picked result to the given callback.
+   * 
+   * @param callback The callback
+   * @param result The result to dispatch
+   */
+  public static void dispatch(AbstractPickerCallback callback, BaseResult result) {
+    final BaseResult baseResult = result.cast();
+    final ViewToken viewToken = baseResult.getViewToken();
+
+    if (Action.PICKED.equals(baseResult.getAction())) {
+      if (callback.isApplicable(viewToken)) {
+        callback.onPicked(viewToken, result);
+      }
     }
     else {
       callback.onCanceled();
