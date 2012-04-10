@@ -15,13 +15,13 @@
  */
 package com.google.gwt.ajaxloader.client;
 
+import java.util.Vector;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ScriptElement;
 import com.google.gwt.user.client.Window;
-
-import java.util.Vector;
 
 /**
  * A wrapper for the google Ajax API loader.
