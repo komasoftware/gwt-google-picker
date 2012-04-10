@@ -86,6 +86,11 @@ public enum ViewId implements JavaScriptEnum<String> {
   YOUTUBE("YOUTUBE"),
 
   /**
+   * Your webcam
+   */
+  WEBCAM("WEBCAM"),
+  
+  /**
    * The maps view
    */
   MAPS("MAPS");

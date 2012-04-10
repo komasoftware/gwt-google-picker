@@ -15,10 +15,10 @@
  */
 package com.google.gwt.ajaxloader.client;
 
+import java.util.Date;
+
 import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.core.client.JavaScriptObject;
-
-import java.util.Date;
 
 /**
  * A collection of properties of arbitrary type, for interoperability with

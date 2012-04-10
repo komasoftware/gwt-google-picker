@@ -16,9 +16,9 @@
 
 package com.google.gwt.ajaxloader.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 import java.util.Date;
+
+import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * Wraps a JavaScript Date object.
