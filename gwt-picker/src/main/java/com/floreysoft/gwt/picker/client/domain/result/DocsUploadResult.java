@@ -21,7 +21,7 @@ package com.floreysoft.gwt.picker.client.domain.result;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * ViewId: VIDEO_SEARCH, YOUTUBE
+ * ViewId: DOCS_UPLOAD
  */
 public final class DocsUploadResult extends JavaScriptObject {
   protected DocsUploadResult() {
