@@ -247,6 +247,17 @@ public final class PickerBuilder extends JavaScriptObject {
     return this.setLocale(locale);
   }-*/;
 
+
+  /**
+   * Set the list of MIME types which will be selectable. Use commas to separate MIME types if more than one is required.
+   *
+   * @param mimetypes the list of MIME types which will be selectable. Use commas to separate MIME types if more than one is required
+   * @return The picker builder
+   */
+  public native PickerBuilder setSelectableMimeTypes(String mimeTypes) /*-{
+    return this.setSelectableMimeTypes(mimeTypes);
+  }-*/;
+  
   /**
    * @return A new instance of the picker builder
    */
