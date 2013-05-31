@@ -91,6 +91,13 @@ public final class DocumentResult extends JavaScriptObject {
     }-*/;
 
     /**
+     * @return The mimeType of the item, if provided.
+     */
+    public native String getMimeType() /*-{
+      return this.mimeType;
+    }-*/;
+
+    /**
      * @return A URL for an embeddable version of the item.
      */
     public native String getUrl() /*-{
