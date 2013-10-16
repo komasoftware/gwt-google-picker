@@ -24,23 +24,41 @@ import com.google.gwt.core.client.JavaScriptObject;
  * DocsUploadView is a subclass of View.
  */
 public final class DocsUploadView extends JavaScriptObject {
-  protected DocsUploadView() {}
+	protected DocsUploadView() {
+	}
 
-  public ViewId getId() {
-    return ViewId.findByValue(getNativeId());
-  }
-  private native String getNativeId() /*-{
-    return this.getId();
-  }-*/;
+	public ViewId getId() {
+		return ViewId.findByValue(getNativeId());
+	}
 
-  public native void setQuery(String string) /*-{
-    this.setQuery(string);
-  }-*/;
+	private native String getNativeId() /*-{
+		return this.getId();
+	}-*/;
 
-  /**
-   * @return A new instance of MapsView
-   */
-  public native static DocsUploadView create() /*-{
-    return new $wnd.google.picker.DocsUploadView();
-  }-*/;
+	public native void setQuery(String string) /*-{
+		this.setQuery(string);
+	}-*/;
+
+	/**
+	 * @param include
+	 *            Show folders in the view items.
+	 */
+	public native void setIncludeFolders(boolean include) /*-{
+		this.setIncludeFolders(include);
+	}-*/;
+
+	/**
+	 * @param parentId
+	 *            Sets the initial parent folder to display.
+	 */
+	public native void setParent(String parentId) /*-{
+		this.setParent(parentId);
+	}-*/;
+
+	/**
+	 * @return A new instance of DocsUploadView
+	 */
+	public native static DocsUploadView create() /*-{
+		return new $wnd.google.picker.DocsUploadView();
+	}-*/;
 }

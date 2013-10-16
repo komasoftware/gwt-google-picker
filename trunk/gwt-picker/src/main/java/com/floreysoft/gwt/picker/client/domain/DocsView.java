@@ -58,6 +58,14 @@ public final class DocsView extends JavaScriptObject {
   }-*/;
 
   /**
+   * @param selectFolder
+   *          Enables folder selection
+   */
+  public native void setSelectFolderEnabled(boolean selectFolder) /*-{
+		this.setSelectFolderEnabled(selectFolder);
+  }-*/;
+
+  /**
    * @param mine
    *          Filters the documents based on whether they are owned by the user,
    *          or shared with the user.
@@ -88,5 +96,12 @@ public final class DocsView extends JavaScriptObject {
    */
   public native static DocsView create() /*-{
 		return new $wnd.google.picker.DocsView();
+  }-*/;
+
+  /**
+   * @return A new instance of DocsView
+   */
+  public native static DocsView create(ViewId viewId) /*-{
+		return new $wnd.google.picker.DocsView(viewId);
   }-*/;
 }

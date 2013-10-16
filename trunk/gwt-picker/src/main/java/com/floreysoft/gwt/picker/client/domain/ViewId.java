@@ -31,6 +31,11 @@ public enum ViewId implements JavaScriptEnum<String> {
   DOCS("DOCS"),
 
   /**
+   * All Google Docs image types.
+   */
+  DOCS_IMAGES("DOCS_IMAGES"),
+
+  /**
    * Google Docs Document.
    */
   DOCUMENTS("DOCUMENTS"),
