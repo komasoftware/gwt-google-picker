@@ -134,6 +134,14 @@ public final class PickerBuilder extends JavaScriptObject {
 		return this.setRelayUrl(url);
   }-*/;
 
+  public native PickerBuilder setOAuthToken(String oauthToken) /*-{
+  	return this.setOAuthToken(oauthToken);
+  }-*/;
+
+  public native String getOAuthToken() /*-{
+  	return this.getOAuthToken();
+  }-*/;
+  
   /**
    * Set the preferred dialog size. The dialog will be auto-centered. It has a
    * minimum size of (566,350) and a maximum size of (1051,650).
